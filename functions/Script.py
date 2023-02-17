@@ -184,17 +184,17 @@ avg.show()
 pandas_df = avg.toPandas()
 
 # Save Pandas DataFrame as CSV file in Databricks File System (DBFS)
-csv_file_path = "/dbfs/FileStore/test/new_df.csv"
+csv_file_path = "/dbfs/FileStore/test/output_df.csv"
 output_csv = pandas_df.to_csv(csv_file_path, index=False)
 
 # Download the CSV file to local machine
-dbutils.fs.cp("file:" + csv_file_path, "file:/databricks/driver/new_df.csv")
+dbutils.fs.cp("file:" + csv_file_path, "file:/databricks/driver/output_df.csv")
 
 
 
 # COMMAND ----------
 
-df = spark.read.format("csv").option("header", "true").load("dbfs:/FileStore/test/new_df.csv")
+df = spark.read.format("csv").option("header", "true").load("dbfs:/FileStore/test/output_df.csv")
 
 # COMMAND ----------
 
@@ -205,12 +205,12 @@ display(df)
 # MAGIC %md
 # MAGIC 
 # MAGIC #URL to csv output
-# MAGIC https://hf-anz-ds.cloud.databricks.com/files/test/new_df.csv?o=2322873405429936
+# MAGIC https://hf-anz-ds.cloud.databricks.com/files/test/output_df.csv?o=2322873405429936
 
 # COMMAND ----------
 
 #Remove files from databricks directory after git push
-#dbutils.fs.rm("/FileStore/test/output.csv")
+dbutils.fs.rm("/dbfs/FileStore/test/output_df.csv")
 
 # COMMAND ----------
 
