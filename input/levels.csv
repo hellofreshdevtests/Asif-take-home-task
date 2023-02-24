@@ -1,0 +1,5 @@
+difficulty,min,max
+easy,0,30
+medium,30,60
+hard,60,70
+very-hard,70,80
